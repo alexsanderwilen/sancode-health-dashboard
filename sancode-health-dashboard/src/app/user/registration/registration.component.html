@@ -1,0 +1,82 @@
+<div class="mb-4">
+  <h2 class="text-success">
+    Criar nova conta
+  </h2>
+  <div>Já tem uma conta?
+    <a routerLink="/signin" class="text-decoration-none fw-medium text-success d-inlin-block">Entrar</a>
+  </div>
+</div>
+<form class="needs-validation" novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="mb-3 form-floating">
+    <input class="form-control bg-body-secondary" style="text-transform: capitalize;" id="fullName"
+      placeholder="Full Name" formControlName="fullName" required>
+    <label for="fullName" class="form-label">Nome</label>
+    <div class="invalid-feedback">
+      Informe seu nome.
+    </div>
+  </div>
+
+  <div class="mb-3 form-floating">
+    <input class="form-control bg-body-secondary" type="email" id="email" placeholder="Email" formControlName="email"
+      style="text-transform: lowercase;" required>
+    <label for="email" class="form-label">E-mail</label>
+    <div class="invalid-feedback">
+      Informe um e-mail válido.
+    </div>
+  </div>
+
+  <div class="mb-3 form-floating">
+    <input class="form-control bg-body-secondary  no-valid-feedback" [type]="showPassword ? 'text' : 'password'"
+      placeholder="Password" formControlName="password" id="password" required
+      [ngClass]="{'is-invalid': hasDisplayableError('password')}">
+    <label for="password" class="form-label">Senha</label>
+    <i class="bi bi-eye position-absolute top-50 end-0 translate-middle-y me-3" *ngIf="form.get('password')?.value"
+      (click)="showPassword = !showPassword" [ngClass]="{'bi-eye-slash': !showPassword, 'bi-eye': showPassword}"
+      style="cursor: pointer;"></i>
+    <div class="invalid-feedback" *ngIf="hasDisplayableErrorPassowrdNull('password')">
+      Digite sua senha.
+    </div>
+    <div class="invalid-feedback" *ngIf="hasDisplayableError('password')  && !hasDisplayableErrorPassowrdNull('password')">
+      Sua senha deve ter pelo menos 6 caracteres e conter um caracter especial.
+    </div>
+  </div>
+
+  <div class="mb-3 form-floating">
+    <input class="form-control bg-body-secondary no-valid-feedback" [type]="showConfirmPassword ? 'text' : 'password'"
+      placeholder="Confirme Password" formControlName="confirmPassword" id="confirmPassword" required
+      [ngClass]="{'is-invalid': hasDisplayableError('confirmPassword') && form.controls.confirmPassword.hasError('passwordMismatch')}">
+    <label for="password" class="form-label">Senha</label>
+    <i class="bi bi-eye position-absolute top-50 end-0 translate-middle-y me-3"
+      *ngIf="form.get('confirmPassword')?.value" (click)="showConfirmPassword = !showConfirmPassword"
+      [ngClass]="{'bi-eye-slash': !showConfirmPassword, 'bi-eye': showConfirmPassword}" style="cursor: pointer;"></i>
+    <div class="invalid-feedback"
+      *ngIf="hasDisplayableError('confirmPassword') && !form.controls.confirmPassword.hasError('passwordMismatch')">
+      Confirme sua senha.
+    </div>
+    <div class="invalid-feedback"
+      *ngIf="hasDisplayableError('confirmPassword') && form.controls.confirmPassword.hasError('passwordMismatch')">
+      As senhas estão diferentes.
+    </div>
+  </div>
+
+  <style>
+    .no-valid-feedback {
+      /* border-color: initial !important;
+          padding-right: initial !important; */
+      background-image: none !important;
+    }
+
+    .no-valid-feedback.is-invalid {
+      border-color: #dc3545 !important;
+      /* Cor da borda vermelha para erro */
+      padding-right: 2.25rem !important;
+
+    }
+  </style>
+
+  <div class="mt-4">
+    <button type="submit" class="btn btn-success w-100 rounded-3">
+      Cadastrar
+    </button>
+  </div>
+</form>
