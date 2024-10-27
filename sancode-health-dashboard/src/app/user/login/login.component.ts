@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
@@ -47,7 +47,7 @@ export class LoginComponent {
       this.service.signin(this.form.value).subscribe({
         next: (res: any) => {
           localStorage.setItem('token', res.accessToken);
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/menu');
         },
         error: err => {
            if (err.status == 401) 
