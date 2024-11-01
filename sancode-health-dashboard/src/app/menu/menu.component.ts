@@ -15,10 +15,14 @@ import { Title } from '@angular/platform-browser';
 })
 export class MenuComponent implements OnInit {
   cards = [
-    { title: 'Cadastro', content: 'Módulo Cadastro', color: 'text-bg-primary', link: 'cadastro' },
+    { title: 'Cadastro', content: 'Módulo Cadastro', color: 'text-bg-primary', link: 'http://localhost:4201' },
     { title: 'Financeiro', content: 'Módulo Financeiro', color: 'text-bg-success', link: 'financeiro' },
     { title: 'Contas a Pagar', content: 'Módulo Contas a Pagar', color: 'text-bg-warning', link: 'contas-pagar' },
-    { title: 'Plano', content: 'Módulo Plano', color: 'text-bg-white', link: '/plano' },
+    { title: 'Planos', content: 'Módulo Planos', color: 'text-bg-white', link: '/planos' },
+    { title: 'Guias', content: 'Módulo Guias', color: 'text-bg-secondary', link: '/guias' },    
+    { title: 'Contabilidade', content: 'Módulo Contabilidade', color: 'text-bg-dark', link: '/contabilidade' },    
+    { title: 'Relatórios', content: 'Módulo Relatórios', color: 'text-bg-danger', link: '/relatorios' },    
+    { title: 'Parâmetros', content: 'Módulo Parâmetros', color: 'text-bg-info', link: '/parametros' },    
   ];
 
   constructor(
@@ -40,6 +44,7 @@ export class MenuComponent implements OnInit {
 
   cardClicked(url: string) {
     console.log(url);
-    this.router.navigate([url]);
+    //this.router.navigate([url]);
+    window.location.href = url;
   }
 }
